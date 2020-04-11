@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface MovieRepository extends CrudRepository<Movie,Integer> {
     @Query(value = "select movie from Movie movie where movie.name = :name")
-    public Movie findMovieByName(@Param("name")String name);
+    public Movie findFromDB(@Param("name")String name);
 }

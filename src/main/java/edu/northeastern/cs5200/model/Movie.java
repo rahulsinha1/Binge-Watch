@@ -12,32 +12,39 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date releaseDate;
+    private double imdbRating;
     @Enumerated(EnumType.STRING)
-    private Region region;
-    @Enumerated(EnumType.STRING)
-    private Genre genre;
-    private int imdbRating;
-    private int websiteRating;
-    @Lob @Basic(fetch = FetchType.LAZY) @Column(columnDefinition = "text") private String StoryLine;
-    @Enumerated(EnumType.STRING)
-    private AgeRating ageRating;
+    private Type type;
+    private String genre;
+    private String rated;
+    private int year;
+    private String country;
+    private String runtime;
+    private String director;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "text")
+    private String storyLine;
 
-    public static enum Region{
-        NorthAmerica, SouthAmerica, Asia, Europe;
-    }
-    public static enum Genre{
-        ActionOrAdventure,Documentary,Crime,Drama,Fantasy,Thriller,ScienceFiction,Romance,Animation,Horror,War;
-    }
-    public static enum AgeRating{
-        G,PG,PG13,R,NC17;
+    public static enum Type {
+        movie, series, episode
     }
 
-    public Movie(){}
+    public Movie() {
+    }
+    public Movie(String name, Type type, String genre, String rated,int year,double imdbRating, String country,String runtime,String director,String storyLine){
+        this.name= name;
+        this.type= type;
+        this.genre=genre;
+        this.rated=rated;
+        this.year=year;
+        this.imdbRating=imdbRating;
+        this.country=country;
+        this.runtime=runtime;
+        this.director=director;
+        this.storyLine=storyLine;
+    }
 
-    
     public int getId() {
         return id;
     }
@@ -54,59 +61,75 @@ public class Movie {
         this.name = name;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public Region getRegion() {
-        return region;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
-    }
-
-        public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public int getImdbRating() {
+    public double getImdbRating() {
         return imdbRating;
     }
 
-    public void setImdbRating(int imdbRating) {
+    public void setImdbRating(double imdbRating) {
         this.imdbRating = imdbRating;
     }
 
-    public int getWebsiteRating() {
-        return websiteRating;
+    public Type getType() {
+        return type;
     }
 
-    public void setWebsiteRating(int websiteRating) {
-        this.websiteRating = websiteRating;
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getRated() {
+        return rated;
+    }
+
+    public void setRated(String rated) {
+        this.rated = rated;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
     }
 
     public String getStoryLine() {
-        return StoryLine;
+        return storyLine;
     }
 
     public void setStoryLine(String storyLine) {
-        StoryLine = storyLine;
-    }
-
-    public AgeRating getAgeRating() {
-        return ageRating;
-    }
-
-    public void setAgeRating(AgeRating ageRating) {
-        this.ageRating = ageRating;
+        this.storyLine = storyLine;
     }
 }
