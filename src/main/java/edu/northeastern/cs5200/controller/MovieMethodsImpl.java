@@ -62,6 +62,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
                 }
                 if (entry.getKey().matches("Genre")) {
                     genre = (String) entry.getKey();
+                    System.out.println(entry.getValue());
                 }
                 if (entry.getKey().matches("Rated")) {
                     rated = (String) entry.getValue();
@@ -93,23 +94,5 @@ public class MovieMethodsImpl implements MovieMethodsDao{
         }
         return null;
     }
-
-
-
-    @Override
-    @RequestMapping("/api/movies/add")
-    public Movie addMovie(Movie movie) {
-        //String name, Date releaseDate, Movie.Region region, Movie.Genre genre,
-        movieRepository.save(movie);
-        return movie;
-    }
-
-    @Override
-    @RequestMapping("/api/movies/update")
-    public Movie updateMovie(Movie movie) {
-        movieRepository.save(movie);
-        return movie;
-    }
-
 
 }

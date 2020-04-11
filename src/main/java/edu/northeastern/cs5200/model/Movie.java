@@ -15,6 +15,9 @@ public class Movie {
     private double imdbRating;
     @Enumerated(EnumType.STRING)
     private Type type;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "text")
     private String genre;
     private String rated;
     private int year;

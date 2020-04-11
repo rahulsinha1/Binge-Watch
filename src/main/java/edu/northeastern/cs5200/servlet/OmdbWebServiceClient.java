@@ -38,6 +38,7 @@ public class OmdbWebServiceClient {
         String requestUrl = SEARCH_URL
                 .replaceAll("TITLE",title)
                 .replaceAll("APIKEY",key);
+        System.out.println(SEARCH_URL);
         return sendGetRequest(requestUrl);
     }
 
