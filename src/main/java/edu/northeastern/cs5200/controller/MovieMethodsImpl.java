@@ -30,8 +30,8 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     @RequestMapping("/api/movies/find")
     public Movie findMovie(@RequestParam String name) {
         Movie movie = findFromDB(name);
-        name = name.replaceAll(" ","%20");
         if(movie==null){
+            name = name.replaceAll(" ","%20");
             return findFromOMDB(name);
         }
         return movie;
@@ -50,6 +50,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
             map = gson.fromJson(response, map.getClass());           //import com.google.gson.Gson;
             Movie.Type type = null;
             String movie_name = new String(), genre = null, rated = null, country = null, runtime = null, director = null, storyLine = null;
+            String poster = null;
             int year = 0;
             double imdbrating = 0;
 
@@ -61,8 +62,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
                     type = Movie.Type.valueOf((String) entry.getValue());
                 }
                 if (entry.getKey().matches("Genre")) {
-                    genre = (String) entry.getKey();
-                    System.out.println(entry.getValue());
+                    genre = (String) entry.getValue();
                 }
                 if (entry.getKey().matches("Rated")) {
                     rated = (String) entry.getValue();
@@ -85,10 +85,13 @@ public class MovieMethodsImpl implements MovieMethodsDao{
                 if (entry.getKey().matches("imdbRating")) {
                     imdbrating = Double.valueOf((String) entry.getValue());
                 }
+                if (entry.getKey().matches("Poster")){
+                    poster = (String)entry.getValue();
+                }
 
 //                    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
             }
-            Movie movie = new Movie(movie_name, type, genre, rated, year, imdbrating, country, runtime, director, storyLine);
+            Movie movie = new Movie(movie_name, type, genre, rated, year, imdbrating, country, runtime, director, storyLine,poster);
             movieRepository.save(movie);
             return movie;
         }
