@@ -1,4 +1,4 @@
-package edu.northeastern.cs5200.controllers.user;
+package edu.northeastern.cs5200.DAO;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import edu.northeastern.cs5200.repository.UserRepository;
+import edu.northeastern.cs5200.model.User;
 
 @RestController
 public class UserController {

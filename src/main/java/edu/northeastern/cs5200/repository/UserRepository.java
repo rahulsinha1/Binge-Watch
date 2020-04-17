@@ -1,4 +1,4 @@
-package edu.northeastern.cs5200.controllers.user;
+package edu.northeastern.cs5200.repository;
 
 import java.util.List;
 
@@ -6,10 +6,8 @@ import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface UserRepository
-	extends JpaRepository<UserObject, Integer> {
+import edu.northeastern.cs5200.model.User;
 
-	@Override
-    @Query("select u from user u")
-    List<UserObject> findAll();
+public interface UserRepository
+	extends JpaRepository<User, Integer> {
 }

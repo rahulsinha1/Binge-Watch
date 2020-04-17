@@ -1,15 +1,20 @@
-package edu.northeastern.cs5200.controllers.user;
+package edu.northeastern.cs5200.model;
 
+import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
-import edu.northeastern.cs5200.controllers.Address.Address;
-import edu.northeastern.cs5200.controllers.phone.Phone;
+import edu.northeastern.cs5200.model.Address;
+import edu.northeastern.cs5200.model.Phone;
 
 @MappedSuperclass
 public abstract class Person {
@@ -31,9 +36,26 @@ public abstract class Person {
 
   private String Role;
 
+  @OneToMany(
+          cascade = CascadeType.ALL,
+          orphanRemoval = true
+  )
   private List<Phone> phone;
 
+  @OneToMany(
+          cascade = CascadeType.ALL,
+          orphanRemoval = true
+  )
   private List<Address> address;
+
+  @ManyToMany
+  @JoinTable(
+          name = "users_roles",
+          joinColumns = @JoinColumn(
+                  name = "user_id", referencedColumnName = "id"),
+          inverseJoinColumns = @JoinColumn(
+                  name = "role_id", referencedColumnName = "id"))
+  private Collection<Role> roles;
 
   public Person(String username, String pass) {
     this.username = username;
