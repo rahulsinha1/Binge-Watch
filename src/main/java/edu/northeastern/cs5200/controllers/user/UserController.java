@@ -16,8 +16,8 @@ public class UserController {
 	UserRepository userRepository;
 	
 	@RequestMapping("/api/user/description")
-	public UserObject sayUserObject() {
-		UserObject user = new UserObject("test","password");
+	public User sayUserObject() {
+		User user = new User("test","password");
 		return user;
 	}
 
@@ -26,16 +26,16 @@ public class UserController {
 
 
 @RequestMapping("/api/user/insert/{username}/{pass}")
-public UserObject insertUser(@PathVariable("username") String user,@PathVariable("pass") String pass ) {
-	UserObject userObj = new UserObject(user,pass);
+public User insertUser(@PathVariable("username") String user,@PathVariable("pass") String pass ) {
+	User userObj = new User(user,pass);
 	userRepository.save(userObj);
 	return userObj;
 }
 
 @RequestMapping("/api/users/select/all")
-public List<UserObject> selectAllUserObjects() {
-	List<UserObject> users =
-		(List<UserObject>)userRepository.findAll();
+public List<User> selectAllUserObjects() {
+	List<User> users =
+		(List<User>)userRepository.findAll();
 	return users;
 }
 
