@@ -10,8 +10,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @MappedSuperclass
 public abstract class Person {
@@ -25,12 +27,13 @@ public abstract class Person {
 
   private String lastName;
 
-  @Column(unique = true)
+  @Column(name = "username" ,unique = true , nullable = false)
   private String username;
 
+  @Column(nullable = false)
   private String pass;
 
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
 
 
@@ -40,14 +43,11 @@ public abstract class Person {
   )
   private List<Phone> phone;
 
-  @OneToMany(
-          cascade = CascadeType.ALL,
-          orphanRemoval = true
-  )
-  private List<Address> address;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "address_id", referencedColumnName = "id")
+  private Address address;
 
-  public Person(String firstName, String lastName, String username, String pass, String email, List<Phone> phone, List<Address> address, Role role) {
-    this.id = id;
+  public Person(String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
@@ -135,11 +135,11 @@ public abstract class Person {
     this.phone = phone;
   }
 
-  public List<Address> getAddress() {
+  public Address getAddress() {
     return address;
   }
 
-  public void setAddress(List<Address> address) {
+  public void setAddress(Address address) {
     this.address = address;
   }
 }

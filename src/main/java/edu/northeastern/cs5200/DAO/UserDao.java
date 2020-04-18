@@ -16,17 +16,18 @@ public interface UserDao {
 
   public Optional<User> findUserByUserId(int userId);
 
-  public void updateUser(int userId, User user);
 
-  public void deleteUser(int userId);
+  public User updateUser(String username, User user);
 
-  public void addToWatchList(String movieName);
+  public void deleteUser(String username);
 
-  public void removerFromWatchList(String movieName);
+  public void addToWatchList(String username, String movieName);
 
-  public void followUser(String userName);
+  public void removerFromWatchList(String username,String movieName);
 
-  public void unFollowUser(String userName);
+  public void followUser(String followerName, String followedName);
+
+  public void unFollowUser(String followerName, String followedName,String userName);
 
 
 }

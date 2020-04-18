@@ -10,11 +10,17 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 public class User extends Person {
 
-  public User(int id, String firstName, String lastName, String username, String pass, String email, List<Phone> phone, List<Address> address, Role role) {
+  public User(int id, String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role) {
     super(firstName, lastName, username, pass, email, phone, address, role);
   }
 
