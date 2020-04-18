@@ -4,17 +4,14 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-
-import edu.northeastern.cs5200.model.Address;
-import edu.northeastern.cs5200.model.Phone;
 
 @MappedSuperclass
 public abstract class Person {
@@ -28,13 +25,13 @@ public abstract class Person {
 
   private String lastName;
 
+  @Column(unique = true)
   private String username;
 
   private String pass;
 
   private String email;
 
-  private String Role;
 
   @OneToMany(
           cascade = CascadeType.ALL,
@@ -48,14 +45,16 @@ public abstract class Person {
   )
   private List<Address> address;
 
-  @ManyToMany
-  @JoinTable(
-          name = "users_roles",
-          joinColumns = @JoinColumn(
-                  name = "user_id", referencedColumnName = "id"),
-          inverseJoinColumns = @JoinColumn(
-                  name = "role_id", referencedColumnName = "id"))
-  private Collection<Role> roles;
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
+  @Enumerated(EnumType.STRING)
+  private Role role;
 
   public Person(String username, String pass) {
     this.username = username;
@@ -111,13 +110,6 @@ public abstract class Person {
     this.email = email;
   }
 
-  public String getRole() {
-    return Role;
-  }
-
-  public void setRole(String role) {
-    Role = role;
-  }
 
   public List<Phone> getPhone() {
     return phone;
