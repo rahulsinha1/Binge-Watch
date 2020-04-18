@@ -1,4 +1,4 @@
-package edu.northeastern.cs5200.controller;
+package edu.northeastern.cs5200.DAO;
 
 import edu.northeastern.cs5200.model.Movie;
 

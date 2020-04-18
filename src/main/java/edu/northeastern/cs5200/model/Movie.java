@@ -28,6 +28,10 @@ public class Movie {
     @Basic(fetch = FetchType.LAZY)
     @Column(columnDefinition = "text")
     private String storyLine;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "text")
+    private String poster;
 
     public static enum Type {
         movie, series, episode
@@ -35,7 +39,7 @@ public class Movie {
 
     public Movie() {
     }
-    public Movie(String name, Type type, String genre, String rated,int year,double imdbRating, String country,String runtime,String director,String storyLine){
+    public Movie(String name, Type type, String genre, String rated,int year,double imdbRating, String country,String runtime,String director,String storyLine, String poster){
         this.name= name;
         this.type= type;
         this.genre=genre;
@@ -46,6 +50,7 @@ public class Movie {
         this.runtime=runtime;
         this.director=director;
         this.storyLine=storyLine;
+        this.poster=poster;
     }
 
     public int getId() {
@@ -134,5 +139,13 @@ public class Movie {
 
     public void setStoryLine(String storyLine) {
         this.storyLine = storyLine;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 }
