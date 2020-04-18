@@ -11,6 +11,6 @@ import edu.northeastern.cs5200.model.User;
 public interface UserRepository
 	extends JpaRepository<User, Integer> {
 
-	@Query("select u from user where username = ?1")
+	@Query("select u from User u where username = ?1")
 	public User findByUserName(String username);
 }

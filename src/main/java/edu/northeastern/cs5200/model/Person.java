@@ -30,6 +30,7 @@ public abstract class Person {
 
   private String pass;
 
+  @Column(unique = true)
   private String email;
 
 
@@ -44,6 +45,21 @@ public abstract class Person {
           orphanRemoval = true
   )
   private List<Address> address;
+
+  public Person(String firstName, String lastName, String username, String pass, String email, List<Phone> phone, List<Address> address, Role role) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.username = username;
+    this.pass = pass;
+    this.email = email;
+    this.phone = phone;
+    this.address = address;
+    this.role = role;
+  }
+
+  public Person() {
+  }
 
   public Role getRole() {
     return role;

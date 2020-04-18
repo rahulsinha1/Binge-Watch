@@ -14,6 +14,13 @@ import javax.persistence.ManyToMany;
 @Entity
 public class User extends Person {
 
+  public User(int id, String firstName, String lastName, String username, String pass, String email, List<Phone> phone, List<Address> address, Role role) {
+    super(firstName, lastName, username, pass, email, phone, address, role);
+  }
+
+  public User() {
+  }
+
   public List<User> getFollowers() {
     return followers;
   }
