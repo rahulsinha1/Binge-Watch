@@ -1,14 +1,14 @@
 package edu.northeastern.cs5200.DAO;
 
+import edu.northeastern.cs5200.model.User;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
-import edu.northeastern.cs5200.model.Movie;
-import edu.northeastern.cs5200.model.User;
-
 public interface UserDao {
 
-  public User createUser(User user);
+  public User createUser(User user, HttpSession session);
 
   public List<User> findAllUsers();
 
@@ -16,6 +16,11 @@ public interface UserDao {
 
   public Optional<User> findUserByUserId(int userId);
 
+  public User currentUser(HttpSession session);
+
+  public void logout(HttpSession session);
+
+  public User login(User user, HttpSession session);
 
   public User updateUser(String username, User user);
 
@@ -23,7 +28,7 @@ public interface UserDao {
 
   public void addToWatchList(String username, String movieName);
 
-  public void removerFromWatchList(String username,String movieName);
+  public void removerFromWatchList(String username, String movieName);
 
   public void followUser(String followerName, String followedName);
 
