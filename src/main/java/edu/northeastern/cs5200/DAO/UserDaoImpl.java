@@ -1,6 +1,10 @@
 package edu.northeastern.cs5200.DAO;
 
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -178,8 +182,21 @@ public class UserDaoImpl implements UserDao {
 
   @RequestMapping("/api/user/get/streamingDetails/")
   public Response getStreamingDetails() {
+    OkHttpClient client = new OkHttpClient();
+    Response response = null;
+    Request request = new Request.Builder()
+            .url("https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=bojack&country=uk")
+            .get()
+            .addHeader("x-rapidapi-host", "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com")
+            .addHeader("x-rapidapi-key", "c47aad3ae8mshe01fe4ddc4771c7p14d6a3jsn9de6d24820a9")
+            .build();
 
-
-    return null;
+    try {
+      response = client.newCall(request).execute();
+      System.out.println(response.toString()+"\n"+response.body().string());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+return response;
   }
 }
