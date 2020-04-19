@@ -5,9 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name= "watchlist")
+@Table(name = "watchlist", uniqueConstraints =
+@UniqueConstraint(columnNames = {"movie_id", "user_id"}))
 public class WatchList {
 
   public int getId() {

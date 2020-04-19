@@ -1,5 +1,7 @@
 package edu.northeastern.cs5200.DAO;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +29,13 @@ public interface UserDao {
 
   public void followUser(String followerName, String followedName);
 
-  public void unFollowUser(String followerName, String followedName,String userName);
+  public void unFollowUser(String followerName, String followedName);
+
+  public List<User> getFollowersByUserName( String username);
+
+  public List<User> getFollowingByUserName( String username);
+
+  public List<Movie> getWatchlistByUserName(String username);
 
 
 }

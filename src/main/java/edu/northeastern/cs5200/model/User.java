@@ -51,6 +51,16 @@ public class User extends Person {
     this.watchList = watchList;
   }
 
+  public void addFollower(User follower) {
+    followers.add(follower);
+    follower.following.add(this);
+  }
+
+  public void removeFollower(User follower) {
+    followers.remove(follower);
+    follower.following.remove(this);
+  }
+
 
   @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinTable(name = "USER_RELATIONS",
@@ -67,7 +77,6 @@ public class User extends Person {
   @JoinTable(name = "watchlist",
           joinColumns = @JoinColumn(name = "user_id"),
           inverseJoinColumns = @JoinColumn(name = "movie_id"))
-  @JsonIgnore
   private List<Movie> watchList;
 
   public User(String username, String pass) {
