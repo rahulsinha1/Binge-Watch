@@ -94,7 +94,12 @@ public class UserDaoImpl implements UserDao {
   @Override
   @PostMapping(path = "/api/user/update/{username}", consumes = "application/json", produces = "application/json")
   public User updateUser(@PathVariable("username") String username, @RequestBody User user) {
-    return null;
+    User toUpdate = userRepository.findByUserName(username);
+    toUpdate.setAddress(user.getAddress());
+    toUpdate.setPhone(user.getPhone());
+    userRepository.save(toUpdate);
+    userRepository.updateUser(user.getFirstName(),user.getLastName(),user.getEmail(),user.getPass(),username);
+    return toUpdate;
   }
 
   @RequestMapping("/api/user/delete/{username}")
@@ -181,11 +186,12 @@ public class UserDaoImpl implements UserDao {
 
 
   @RequestMapping("/api/user/get/streamingDetails/")
-  public Response getStreamingDetails() {
+  public String getStreamingDetails() {
     OkHttpClient client = new OkHttpClient();
     Response response = null;
+    String res ="";
     Request request = new Request.Builder()
-            .url("https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=bojack&country=uk")
+            .url("https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=aquarius&country=us")
             .get()
             .addHeader("x-rapidapi-host", "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com")
             .addHeader("x-rapidapi-key", "c47aad3ae8mshe01fe4ddc4771c7p14d6a3jsn9de6d24820a9")
@@ -193,10 +199,12 @@ public class UserDaoImpl implements UserDao {
 
     try {
       response = client.newCall(request).execute();
-      System.out.println(response.toString()+"\n"+response.body().string());
+      res = (response.toString()+"\n"+response.body().string());
     } catch (IOException e) {
       e.printStackTrace();
     }
-return response;
+
+
+return res;
   }
 }
