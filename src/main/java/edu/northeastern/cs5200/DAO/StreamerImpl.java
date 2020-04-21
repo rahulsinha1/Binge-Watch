@@ -33,4 +33,10 @@ public class StreamerImpl implements StreamerDao {
         streamerRepository.deleteById(id);
     }
 
+    @CrossOrigin
+    @Override
+    @RequestMapping("api/streamers/find")
+    public List<Streamer> findStreamerByMovieName(String movieName) {
+        return (List<Streamer>)streamerRepository.findStreamerByMovie(movieName);
+    }
 }

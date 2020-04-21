@@ -186,7 +186,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
                     String platform = loc.getOrDefault("display_name", "");
                     String url = loc.getOrDefault("url", "");
 
-                    Streamer streamer = new Streamer(icon,platform,url, movie);
+                    Streamer streamer = new Streamer(icon,platform,url, movie.getName(),movie);
                     streamerRepository.save(streamer);
                 }
             }

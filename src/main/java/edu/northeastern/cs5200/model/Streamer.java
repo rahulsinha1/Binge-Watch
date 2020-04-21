@@ -39,7 +39,7 @@ public class Streamer {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
 
   private int id;
-//  private String movieName;
+  private String movieName;
   private String streamingPlatform;
   private String streamingUrl;
   private String logoUrl;
@@ -48,11 +48,12 @@ public class Streamer {
   @JsonIgnore
   private Movie movie;
 
-  public Streamer(String logoUrl, String streamingPlatform, String streamingUrl, Movie movie){
+  public Streamer(String logoUrl, String streamingPlatform, String streamingUrl,String movieName,Movie movie){
     this.logoUrl = logoUrl;
     this.streamingPlatform = streamingPlatform;
     this.streamingUrl = streamingUrl;
-    this.movie = movie;
+    this.movieName = movieName;
+    this.movie=movie;
   }
 
   public String getLogoUrl() {
@@ -70,4 +71,13 @@ public class Streamer {
   public void setMovie(Movie movie) {
     this.movie = movie;
   }
+
+  public String getMovieName() {
+    return movieName;
+  }
+
+  public void setMovieName(String movieName) {
+    this.movieName = movieName;
+  }
+
 }

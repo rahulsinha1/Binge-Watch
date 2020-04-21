@@ -8,15 +8,37 @@ public class CriticList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "text")
     private String comment;
     private int grade;
+    private String movieName;
+    private String userName;
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @ManyToOne
     @JoinColumn(name = "critic_id")
-    private Critic critic;
+    private User user;
+
+    public CriticList(){}
+
+    public CriticList(String comment,int grade,String movieName,String userName){
+        this.comment = comment;
+        this.grade = grade;
+        this.userName = userName;
+        this.movieName = movieName;
+    }
+    public CriticList(String comment,int grade,String movieName,String userName,Movie movie,User user){
+        this.comment = comment;
+        this.grade = grade;
+        this.userName = userName;
+        this.movieName = movieName;
+        this.movie = movie;
+        this.user = user;
+    }
 
     public int getId() {
         return id;
@@ -50,11 +72,27 @@ public class CriticList {
         this.movie = movie;
     }
 
-    public Critic getCritic() {
-        return critic;
+    public String getMovieName() {
+        return movieName;
     }
 
-    public void setCritic(Critic critic) {
-        this.critic = critic;
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

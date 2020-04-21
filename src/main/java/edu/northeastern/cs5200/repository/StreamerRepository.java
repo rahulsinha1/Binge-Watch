@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface StreamerRepository extends CrudRepository<Streamer, Integer> {
-    @Query(value = "select streamer from Streamer streamer where streamer.movie=:movie")
-    public Streamer findStreamerByMovie(@Param("movie") Movie movie);
+    @Query(value = "select streamer from Streamer streamer where streamer.movieName = :movieName")
+    public List<Streamer> findStreamerByMovie(@Param("movieName") String movieName);
 }

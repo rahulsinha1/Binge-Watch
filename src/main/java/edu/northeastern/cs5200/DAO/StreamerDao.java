@@ -7,5 +7,6 @@ import java.util.List;
 public interface StreamerDao {
     public List<Streamer> findAllStreamers();
     public void deleteStreamer(int id);
+    public List<Streamer> findStreamerByMovieName(String movieName);
 
 }

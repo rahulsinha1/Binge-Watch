@@ -1,11 +1,7 @@
 package edu.northeastern.cs5200.DAO;
 
 
-import edu.northeastern.cs5200.model.Address;
-import edu.northeastern.cs5200.model.Movie;
-import edu.northeastern.cs5200.model.Phone;
-import edu.northeastern.cs5200.model.Role;
-import edu.northeastern.cs5200.model.User;
+import edu.northeastern.cs5200.model.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -54,7 +50,6 @@ public interface UserDao {
   public User addAddress(String username, Address address);
 
   public User updateRole(String userName, Role role);
-
 
 }
 

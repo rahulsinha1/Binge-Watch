@@ -4,11 +4,8 @@ package edu.northeastern.cs5200.DAO;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import edu.northeastern.cs5200.model.Address;
-import edu.northeastern.cs5200.model.Movie;
-import edu.northeastern.cs5200.model.Phone;
-import edu.northeastern.cs5200.model.Role;
-import edu.northeastern.cs5200.model.User;
+import edu.northeastern.cs5200.model.*;
+import edu.northeastern.cs5200.repository.CriticListRepository;
 import edu.northeastern.cs5200.repository.MovieRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class UserDaoImpl implements UserDao {
   UserRepository userRepository;
   @Autowired
   MovieRepository movieRepository;
+  @Autowired
+  CriticListRepository criticListRepository;
 
   @CrossOrigin
   @RequestMapping("/api/user/description")
@@ -267,4 +266,6 @@ public class UserDaoImpl implements UserDao {
 
 return res;
   }
+
+
 }
