@@ -1,9 +1,12 @@
 package edu.northeastern.cs5200.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -32,6 +35,11 @@ public class Movie {
     @Basic(fetch = FetchType.LAZY)
     @Column(columnDefinition = "text")
     private String poster;
+
+    @OneToMany(mappedBy = "movie",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<CriticList> criticLists;
+
 
     public static enum Type {
         movie, series, episode
@@ -147,5 +155,13 @@ public class Movie {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public List<CriticList> getCriticLists() {
+        return criticLists;
+    }
+
+    public void setCriticLists(List<CriticList> criticLists) {
+        this.criticLists = criticLists;
     }
 }

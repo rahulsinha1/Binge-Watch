@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import edu.northeastern.cs5200.repository.UserRepository;
+//import edu.northeastern.cs5200.repository.UserRepository;
 
 @SpringBootApplication
 public class Cs5200Spring2020Team2Application {
@@ -14,13 +14,13 @@ public class Cs5200Spring2020Team2Application {
     SpringApplication.run(Cs5200Spring2020Team2Application.class, args);
   }
 
-  @Bean
-  CommandLineRunner init(UserRepository userRepository) {
-
-    return args -> {
-      userRepository.findAll().forEach(System.out::println);
-    };
-
-  }
+//  @Bean
+//  CommandLineRunner init(UserRepository userRepository) {
+//
+//    return args -> {
+//      userRepository.findAll().forEach(System.out::println);
+//    };
+//
+//  }
 
 }
