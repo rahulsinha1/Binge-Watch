@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 import edu.northeastern.cs5200.model.Address;
@@ -25,6 +25,14 @@ import edu.northeastern.cs5200.model.Movie;
 import edu.northeastern.cs5200.repository.MovieRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
 import edu.northeastern.cs5200.model.User;
+
+import edu.northeastern.cs5200.model.Address;
+import edu.northeastern.cs5200.model.User;
+import edu.northeastern.cs5200.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class UserDaoImpl implements UserDao {
@@ -61,19 +69,42 @@ public class UserDaoImpl implements UserDao {
   }
 
 
-  @CrossOrigin
-  @PostMapping(path = "/api/user/create", consumes = "application/json", produces = "application/json")
   @Override
-  public User createUser(@RequestBody User user) {
+  @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+  @PostMapping(path = "/api/user/create")
+  public User createUser(@RequestBody User user, HttpSession session) {
+    session.setAttribute("currentUser", user);
     userRepository.save(user);
     return user;
   }
+
+  @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+  @GetMapping(path = "/api/user/currentUser")
+  public User currentUser(HttpSession session) {
+    return (User) session.getAttribute("currentUser");
+  }
+
 
   @CrossOrigin
   @RequestMapping("/api/users/find/all")
   @Override
   public List<User> findAllUsers() {
     return userRepository.findAll();
+  }
+
+
+  @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+  @PostMapping("/api/user/logout")
+  public void logout(HttpSession session) {
+    session.invalidate();
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+  @PostMapping("/api/user/login")
+  public User login(@RequestBody User user, HttpSession session) {
+    user = userRepository.FindUserByCredentials(user.getUsername(), user.getPass());
+    session.setAttribute("currentUser", user);
+    return user;
   }
 
 
