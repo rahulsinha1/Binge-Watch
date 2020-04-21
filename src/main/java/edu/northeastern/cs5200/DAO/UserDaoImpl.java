@@ -4,35 +4,18 @@ package edu.northeastern.cs5200.DAO;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-
-
-
-
 import edu.northeastern.cs5200.model.Address;
 import edu.northeastern.cs5200.model.Movie;
+import edu.northeastern.cs5200.model.User;
 import edu.northeastern.cs5200.repository.MovieRepository;
-import edu.northeastern.cs5200.repository.UserRepository;
-import edu.northeastern.cs5200.model.User;
-
-import edu.northeastern.cs5200.model.Address;
-import edu.northeastern.cs5200.model.User;
 import edu.northeastern.cs5200.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserDaoImpl implements UserDao {
