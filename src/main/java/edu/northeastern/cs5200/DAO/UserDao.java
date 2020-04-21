@@ -1,9 +1,10 @@
 package edu.northeastern.cs5200.DAO;
 
 
+import edu.northeastern.cs5200.model.Movie;
 import edu.northeastern.cs5200.model.User;
 
-
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
