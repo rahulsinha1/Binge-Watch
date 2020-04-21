@@ -1,5 +1,7 @@
 package edu.northeastern.cs5200.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class CriticList {
     private String movieName;
     private String userName;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
