@@ -10,5 +10,5 @@ public interface CriticListDao {
     public CriticList addCriticList(Critic critic, Movie movie);
     public List<CriticList> findAllCriticList();
     public List<CriticList> findCriticListForCritic(Critic critic);
-    public List<CriticList> findCriticListByTitle(String name);
+    public List<CriticList> findCriticListByMovieName(String name);
 }

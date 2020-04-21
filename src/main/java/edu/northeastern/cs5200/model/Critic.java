@@ -12,9 +12,12 @@ import java.util.List;
 public class Critic extends Person{
     private String company;
 
-    public Critic(String username, String pass) {
-        super(username, pass);
+    public Critic(int id, String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role,String company) {
+        super(firstName, lastName, username, pass, email, phone, address, role);
+        this.company = company;
     }
+    public Critic(){}
+
     @OneToMany(mappedBy = "critic",fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<CriticList> criticLists;

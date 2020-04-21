@@ -11,4 +11,5 @@ public interface CriticDao {
     public Critic findCriticById(int id);
     Critic createCritic(Critic critic);
 
+
 }

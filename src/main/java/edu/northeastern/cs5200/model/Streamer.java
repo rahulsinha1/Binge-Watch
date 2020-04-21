@@ -1,10 +1,9 @@
 package edu.northeastern.cs5200.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+
+import javax.persistence.*;
 
 @Entity
 public class Streamer {
@@ -19,13 +18,6 @@ public class Streamer {
     this.id = id;
   }
 
-  public String getMovieName() {
-    return movieName;
-  }
-
-  public void setMovieName(String movieName) {
-    this.movieName = movieName;
-  }
 
   public String getStreamingPlatform() {
     return streamingPlatform;
@@ -47,11 +39,35 @@ public class Streamer {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
 
   private int id;
-  private String movieName;
+//  private String movieName;
   private String streamingPlatform;
   private String streamingUrl;
   private String logoUrl;
 
-  @OneToOne(mappedBy = "streamer")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JsonIgnore
   private Movie movie;
+
+  public Streamer(String logoUrl, String streamingPlatform, String streamingUrl, Movie movie){
+    this.logoUrl = logoUrl;
+    this.streamingPlatform = streamingPlatform;
+    this.streamingUrl = streamingUrl;
+    this.movie = movie;
+  }
+
+  public String getLogoUrl() {
+    return logoUrl;
+  }
+
+  public void setLogoUrl(String logoUrl) {
+    this.logoUrl = logoUrl;
+  }
+
+  public Movie getMovie() {
+    return movie;
+  }
+
+  public void setMovie(Movie movie) {
+    this.movie = movie;
+  }
 }

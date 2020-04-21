@@ -40,10 +40,10 @@ public class Movie {
     @Fetch(FetchMode.SUBSELECT)
     private List<CriticList> criticLists;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "streamer_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "movie",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Streamer> streamers;
 
-    private Streamer streamer;
 
     public static enum Type {
         movie, series, episode
@@ -167,5 +167,13 @@ public class Movie {
 
     public void setCriticLists(List<CriticList> criticLists) {
         this.criticLists = criticLists;
+    }
+
+    public List<Streamer> getStreamers() {
+        return streamers;
+    }
+
+    public void setStreamers(List<Streamer> streamers) {
+        this.streamers = streamers;
     }
 }
