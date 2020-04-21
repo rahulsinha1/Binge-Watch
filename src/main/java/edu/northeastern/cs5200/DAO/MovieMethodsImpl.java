@@ -2,7 +2,9 @@ package edu.northeastern.cs5200.DAO;
 
 import com.google.gson.Gson;
 import edu.northeastern.cs5200.model.Movie;
+import edu.northeastern.cs5200.model.User;
 import edu.northeastern.cs5200.repository.MovieRepository;
+import edu.northeastern.cs5200.repository.UserRepository;
 import edu.northeastern.cs5200.servlet.OmdbWebServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class MovieMethodsImpl implements MovieMethodsDao{
     @Autowired
     private MovieRepository movieRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @CrossOrigin
     @Override
@@ -42,6 +46,16 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     @RequestMapping("api/movies/delete")        //delete movie by id
     public void deleteMovie(@RequestParam int id) {
         movieRepository.deleteById(id);
+    }
+
+
+    @CrossOrigin
+    @GetMapping("/api/likedBy/{movieName}")
+    @Override
+    public List<User> getLikedMovie(@PathVariable("movieName")String movieName) {
+        Movie movie = movieRepository.findFromDB(movieName);
+        List<User> users = userRepository.getUserWithMovie(movie.getId());
+        return users;
     }
 
 

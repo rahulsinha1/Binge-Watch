@@ -6,6 +6,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import edu.northeastern.cs5200.model.Address;
 import edu.northeastern.cs5200.model.Movie;
+import edu.northeastern.cs5200.model.Phone;
+import edu.northeastern.cs5200.model.Role;
 import edu.northeastern.cs5200.model.User;
 import edu.northeastern.cs5200.repository.MovieRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
@@ -115,6 +117,50 @@ public class UserDaoImpl implements UserDao {
     userRepository.updateUser(user.getFirstName(),user.getLastName(),user.getEmail(),user.getPass(),username);
     return toUpdate;
   }
+
+  @RequestMapping(path = "/api/user/addPhone/{username}",consumes = "application/json", produces = "application/json")
+  @CrossOrigin
+  @Override
+  public User addPhone(@PathVariable("username") String username, @RequestBody Phone phone)
+  {
+    User toUpdate = userRepository.findByUserName(username);
+    toUpdate.addPhone(phone);
+    userRepository.save(toUpdate);
+    return toUpdate;
+  }
+
+  @RequestMapping(path = "/api/user/removePhone/{username}",consumes = "application/json", produces = "application/json")
+  @CrossOrigin
+  @Override
+  public User removePhone(@PathVariable("username") String username, @RequestBody Phone phone)
+  {
+    User toUpdate = userRepository.findByUserName(username);
+    toUpdate.getPhone().remove(phone);
+    userRepository.save(toUpdate);
+    return toUpdate;
+  }
+
+  @RequestMapping(path = "/api/user/addAddress/{username}",consumes = "application/json", produces = "application/json")
+  @CrossOrigin
+  @Override
+  public User addAddress(@PathVariable("username") String username, @RequestBody Address address)
+  {
+    User toUpdate = userRepository.findByUserName(username);
+    toUpdate.setAddress(address);
+    userRepository.save(toUpdate);
+    return toUpdate;
+  }
+
+  @RequestMapping("/api/user/updateRole/{username}/{role}")
+  @CrossOrigin
+  @Override
+  public User updateRole(@PathVariable("username") String username, @PathVariable("role") Role role) {
+    User user = findUserByUserName(username);
+    user.setRole(role);
+    userRepository.save(user);
+    return user;
+  }
+
 
   @RequestMapping("/api/user/delete/{username}")
   @CrossOrigin

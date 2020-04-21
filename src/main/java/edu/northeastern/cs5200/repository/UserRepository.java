@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 
@@ -29,6 +31,9 @@ public interface UserRepository
 			@Param("username") String username,
 			@Param("pass") String pass
 	);
+
+	@Query("Select user from User user where user.id in(select w.user_id from WatchList w where w.movie_id =?1)" )
+  List<User> getUserWithMovie(int id);
 
 	/*@Modifying
 	@Query("update User u set u.firstName = ?1, u.lastName = ?2 where u.id = ?1")

@@ -62,6 +62,7 @@ public class User extends Person {
   }
 
 
+
   @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinTable(name = "USER_RELATIONS",
           joinColumns = @JoinColumn(name = "FOLLOWED_ID"),

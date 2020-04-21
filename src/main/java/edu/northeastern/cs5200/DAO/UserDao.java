@@ -1,7 +1,10 @@
 package edu.northeastern.cs5200.DAO;
 
 
+import edu.northeastern.cs5200.model.Address;
 import edu.northeastern.cs5200.model.Movie;
+import edu.northeastern.cs5200.model.Phone;
+import edu.northeastern.cs5200.model.Role;
 import edu.northeastern.cs5200.model.User;
 
 import javax.servlet.http.HttpSession;
@@ -43,6 +46,14 @@ public interface UserDao {
   public List<User> getFollowingByUserName( String username);
 
   public List<Movie> getWatchlistByUserName(String username);
+
+  public User addPhone(String username, Phone phone);
+
+  public User removePhone(String username, Phone phone);
+
+  public User addAddress(String username, Address address);
+
+  public User updateRole(String userName, Role role);
 
 
 }
