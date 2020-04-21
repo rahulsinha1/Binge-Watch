@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @Repository
 public class MovieMethodsImpl implements MovieMethodsDao{
@@ -30,6 +31,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     private MovieRepository movieRepository;
     @Autowired
     private StreamerRepository streamerRepository;
+    @Autowired
     private UserRepository userRepository;
     @CrossOrigin
     @Override
