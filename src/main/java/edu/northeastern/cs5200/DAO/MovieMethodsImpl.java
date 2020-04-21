@@ -1,7 +1,14 @@
 package edu.northeastern.cs5200.DAO;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import edu.northeastern.cs5200.model.Movie;
+import edu.northeastern.cs5200.model.Streamer;
+import edu.northeastern.cs5200.repository.MovieRepository;
+import edu.northeastern.cs5200.repository.StreamerRepository;
 import edu.northeastern.cs5200.model.User;
 import edu.northeastern.cs5200.repository.MovieRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
@@ -10,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +29,8 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
+    private StreamerRepository streamerRepository;
     private UserRepository userRepository;
-
     @CrossOrigin
     @Override
     @GetMapping("/api/movies")
@@ -139,9 +148,52 @@ public class MovieMethodsImpl implements MovieMethodsDao{
             }
             Movie movie = new Movie(movie_name, type, genre, rated, year, imdbrating, country, runtime, director, storyLine,poster);
             movieRepository.save(movie);
+            int movie_id = movieRepository.findFromDB(movie_name).getId();
+            getStreamingDetails(movie_name, movie);
             return movie;
         }
         return null;
     }
 
+    public void getStreamingDetails(String name, Movie movie) {
+        String SEARCH_URL = "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=TITLE&country=us";
+        String requestUrl = SEARCH_URL
+                .replaceAll("TITLE",name);
+        OkHttpClient client = new OkHttpClient();
+        Response response = null;
+        String res ="";
+        Request request = new Request.Builder()
+                .url(requestUrl)
+                .get()
+                .addHeader("x-rapidapi-host", "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com")
+                .addHeader("x-rapidapi-key", "c47aad3ae8mshe01fe4ddc4771c7p14d6a3jsn9de6d24820a9")
+                .build();
+
+        try {
+            response = client.newCall(request).execute();
+            res = response.body().string();
+            Gson gson = new Gson();
+            Map<String, Object> map = new HashMap<>();
+            map = gson.fromJson(res, map.getClass());
+            if(map.size() > 0){
+                ArrayList<Object> results = (ArrayList<Object>) map.get("results");
+                LinkedTreeMap<String, Object> ltm = (LinkedTreeMap<String, Object>) results.get(0);
+                ArrayList<LinkedTreeMap<String, String>> locations = (ArrayList<LinkedTreeMap<String, String>>) ltm.get("locations");
+//                        () (map.get("results")).get(0).get("location");
+                for (int i = 0; i < locations.size(); i++) {
+                    LinkedTreeMap<String, String> loc = locations.get(i);
+                    String icon = loc.getOrDefault("icon", "");
+                    String platform = loc.getOrDefault("display_name", "");
+                    String url = loc.getOrDefault("url", "");
+
+                    Streamer streamer = new Streamer(icon,platform,url, movie.getName(),movie);
+                    streamerRepository.save(streamer);
+                }
+            }
+
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return;
+    }
 }
