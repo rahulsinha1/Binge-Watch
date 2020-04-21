@@ -1,12 +1,12 @@
 package edu.northeastern.cs5200.DAO;
 
+import com.google.gson.Gson;
 import edu.northeastern.cs5200.model.Movie;
 import edu.northeastern.cs5200.repository.MovieRepository;
 import edu.northeastern.cs5200.servlet.OmdbWebServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +18,15 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     @Autowired
     private MovieRepository movieRepository;
 
+    @CrossOrigin
     @Override
     @GetMapping("/api/movies")
     public List<Movie> findAllMovies() {
-        return(List<Movie>) movieRepository.findAll();
+        return (List<Movie>) movieRepository.findAll();
     }
+
+
+    @CrossOrigin
 
     @Override
     @PostMapping("/api/movies/create")          //create movie
@@ -45,8 +49,8 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     @RequestMapping("/api/movies/find")         //find movie by name
     public Movie findMovie(@RequestParam String name) {
         Movie movie = findFromDB(name);
-        if(movie==null){
-            name = name.replaceAll(" ","%20");
+        if (movie == null) {
+            name = name.replaceAll(" ", "%20");
             return findFromOMDB(name);
         }
         return movie;

@@ -1,0 +1,142 @@
+{
+  "results": [
+    {
+      "id": "5d914018302b840050aca95b",
+      "picture": "https://utellyassets9-1.imgix.net/api/Images/9db1d08545c998ae06350c921d45a086/Redirect",
+      "name": "Aquarius",
+      "locations": [
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/iTunesIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "iTunes",
+          "name": "iTunesIVAUS",
+          "id": "5d80a9a5d51bef861d3740d3",
+          "url": "https://itunes.apple.com/us/tv-season/your-mother-should-know/id992391218?i=995283833"
+        },
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/NetflixIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "Netflix",
+          "name": "NetflixIVAUS",
+          "id": "5d81fe2fd51bef0f42268f0f",
+          "url": "https://www.netflix.com/title/80107383"
+        }
+      ],
+      "provider": "iva",
+      "weight": 9070,
+      "external_ids": {
+        "iva_rating": null,
+        "imdb": {
+          "url": "https://www.imdb.com/title/tt3768572",
+          "id": "tt3768572"
+        },
+        "tmdb": {
+          "url": "https://www.themoviedb.org/movie/61239",
+          "id": "61239"
+        },
+        "wiki_data": {
+          "url": "https://www.wikidata.org/wiki/Q17457913",
+          "id": "Q17457913"
+        },
+        "iva": {
+          "id": "152142"
+        },
+        "gracenote": null,
+        "rotten_tomatoes": null,
+        "facebook": null
+      }
+    },
+    {
+      "id": "5e28ebe8e847f9277fa03a1a",
+      "picture": "https://utellyassets9-1.imgix.net/api/Images/b5317d34587cf27176070ab3a681495d/Redirect",
+      "name": "Aquarius",
+      "locations": [
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/GooglePlayIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "Google Play",
+          "name": "GooglePlayIVAUS",
+          "id": "5d8260b128fbcd0052aed197",
+          "url": "https://play.google.com/store/movies/details/Aquarius?gl=US&hl=en&id=XlQ_3vKsbLg"
+        },
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/iTunesIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "iTunes",
+          "name": "iTunesIVAUS",
+          "id": "5d80a9a5d51bef861d3740d3",
+          "url": "https://itunes.apple.com/us/movie/aquarius/id1288886445"
+        },
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/NetflixIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "Netflix",
+          "name": "NetflixIVAUS",
+          "id": "5d81fe2fd51bef0f42268f0f",
+          "url": "https://www.netflix.com/title/80113667"
+        }
+      ],
+      "provider": "iva",
+      "weight": 0,
+      "external_ids": {
+        "iva_rating": null,
+        "imdb": {
+          "url": "https://www.imdb.com/title/tt5221584",
+          "id": "tt5221584"
+        },
+        "tmdb": {
+          "url": "https://www.themoviedb.org/movie/377273",
+          "id": "377273"
+        },
+        "wiki_data": {
+          "url": "https://www.wikidata.org/wiki/Q23833608",
+          "id": "Q23833608"
+        },
+        "iva": {
+          "id": "696964"
+        },
+        "gracenote": null,
+        "rotten_tomatoes": null,
+        "facebook": null
+      }
+    },
+    {
+      "id": "5d97da999a76a40056de4a28",
+      "picture": "https://utellyassets9-1.imgix.net/api/Images/189abf9e376576ae4f2b81ef5a77bade/Redirect",
+      "name": "The Aquarium",
+      "locations": [
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/AmazonInstantVideoIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "Amazon Instant Video",
+          "name": "AmazonInstantVideoIVAUS",
+          "id": "5d82609332ac2f0051962fe6",
+          "url": "https://www.amazon.com/gp/product/B07TKHFR2K?creativeASIN=B07TKHFR2K&ie=UTF8&linkCode=xm2&tag=utellycom00-21"
+        },
+        {
+          "icon": "https://utellyassets7.imgix.net/locations_icons/utelly/black_new/GooglePlayIVAUS.png?w=92&auto=compress&app_version=ae3576e2-0796-4eda-b953-80cadc8e2619_eww2020-04-19",
+          "display_name": "Google Play",
+          "name": "GooglePlayIVAUS",
+          "id": "5d8260b128fbcd0052aed197",
+          "url": "https://play.google.com/store/tv/show?amp=&amp=&cdid=tvseason-Wr1uX3aWJBc3F-vObfH6_A&gdid=tvepisode-eGnHZT8dfCc&gl=US&hl=en&id=OO9tPLKM9d1Yu7JcVJYopA"
+        }
+      ],
+      "provider": "iva",
+      "weight": 0,
+      "external_ids": {
+        "iva_rating": null,
+        "imdb": {
+          "url": "https://www.imdb.com/title/tt9780390",
+          "id": "tt9780390"
+        },
+        "tmdb": {
+          "url": "https://www.themoviedb.org/movie/89609",
+          "id": "89609"
+        },
+        "wiki_data": null,
+        "iva": null,
+        "gracenote": null,
+        "rotten_tomatoes": null,
+        "facebook": null
+      }
+    }
+  ],
+  "updated": "2020-04-19T05:09:31+0100",
+  "term": "aquarius",
+  "status_code": 200,
+  "variant": "ivafull"
+}

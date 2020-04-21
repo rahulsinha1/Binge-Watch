@@ -40,6 +40,10 @@ public class Movie {
     @Fetch(FetchMode.SUBSELECT)
     private List<CriticList> criticLists;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "streamer_id", referencedColumnName = "id")
+
+    private Streamer streamer;
 
     public static enum Type {
         movie, series, episode
