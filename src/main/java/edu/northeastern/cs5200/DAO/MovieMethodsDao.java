@@ -7,4 +7,7 @@ import java.util.List;
 public interface MovieMethodsDao {
     public List<Movie> findAllMovies();
     public Movie findMovie(String name);
+    public Movie findMovieById(int id);
+    Movie createMovie(Movie movie);
+    public void deleteMovie(int id);
 }
