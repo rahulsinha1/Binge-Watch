@@ -7,10 +7,9 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import edu.northeastern.cs5200.model.Movie;
 import edu.northeastern.cs5200.model.Streamer;
-import edu.northeastern.cs5200.repository.MovieRepository;
-import edu.northeastern.cs5200.repository.StreamerRepository;
 import edu.northeastern.cs5200.model.User;
 import edu.northeastern.cs5200.repository.MovieRepository;
+import edu.northeastern.cs5200.repository.StreamerRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
 import edu.northeastern.cs5200.servlet.OmdbWebServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,15 @@ import java.util.Map;
 
 @RestController
 @Repository
-public class MovieMethodsImpl implements MovieMethodsDao{
+public class MovieMethodsImpl implements MovieMethodsDao {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
     private StreamerRepository streamerRepository;
+
+    @Autowired
     private UserRepository userRepository;
+
     @CrossOrigin
     @Override
     @GetMapping("/api/movies")
@@ -40,7 +42,6 @@ public class MovieMethodsImpl implements MovieMethodsDao{
 
 
     @CrossOrigin
-
     @Override
     @PostMapping("/api/movies/create")          //create movie
     public Movie createMovie(@ModelAttribute Movie movie) {
@@ -50,7 +51,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     }
 
 
-
+    @CrossOrigin
     @Override
     @RequestMapping("api/movies/delete")        //delete movie by id
     public void deleteMovie(@RequestParam int id) {
@@ -67,7 +68,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
         return users;
     }
 
-
+    @CrossOrigin
     @Override
     @RequestMapping("/api/movies/find")         //find movie by name
     public Movie findMovie(@RequestParam String name) {
@@ -79,6 +80,7 @@ public class MovieMethodsImpl implements MovieMethodsDao{
         return movie;
     }
 
+    @CrossOrigin
     @Override
     @RequestMapping("/api/movies/find/id")     //find movie by id
     public Movie findMovieById(@RequestParam int id) {

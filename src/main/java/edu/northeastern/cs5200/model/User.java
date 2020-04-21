@@ -2,9 +2,8 @@ package edu.northeastern.cs5200.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.List;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -24,6 +23,7 @@ public class User extends Person {
 
   public User() {
   }
+
 
   public List<User> getFollowers() {
     return followers;

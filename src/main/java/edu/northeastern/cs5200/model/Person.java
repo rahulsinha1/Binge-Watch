@@ -2,21 +2,9 @@ package edu.northeastern.cs5200.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @MappedSuperclass
 public abstract class Person {
@@ -48,6 +36,7 @@ public abstract class Person {
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id", referencedColumnName = "id")
+  @JsonIgnore
   private Address address;
 
   public Person(String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role) {
