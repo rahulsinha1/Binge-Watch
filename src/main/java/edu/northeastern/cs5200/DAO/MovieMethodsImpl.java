@@ -29,7 +29,24 @@ public class MovieMethodsImpl implements MovieMethodsDao{
     @CrossOrigin
 
     @Override
-    @RequestMapping("/api/movies/find")
+    @PostMapping("/api/movies/create")          //create movie
+    public Movie createMovie(@ModelAttribute Movie movie) {
+        movie.setPoster("http://sacobserver.com/wp-content/uploads/2012/08/coming-soon.jpg");
+        movieRepository.save(movie);
+        return movie;
+    }
+
+
+
+    @Override
+    @RequestMapping("api/movies/delete")        //delete movie by id
+    public void deleteMovie(@RequestParam int id) {
+        movieRepository.deleteById(id);
+    }
+
+
+    @Override
+    @RequestMapping("/api/movies/find")         //find movie by name
     public Movie findMovie(@RequestParam String name) {
         Movie movie = findFromDB(name);
         if (movie == null) {
@@ -37,6 +54,12 @@ public class MovieMethodsImpl implements MovieMethodsDao{
             return findFromOMDB(name);
         }
         return movie;
+    }
+
+    @Override
+    @RequestMapping("/api/movies/find/id")     //find movie by id
+    public Movie findMovieById(@RequestParam int id) {
+        return movieRepository.findById(id).get();
     }
 
 
@@ -57,8 +80,15 @@ public class MovieMethodsImpl implements MovieMethodsDao{
             double imdbrating = 0;
 
             for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if(entry.getKey().matches("Error")){
+                    System.out.println("Movie not found!");
+                    return null;
+                }
                 if (entry.getKey().matches("Title")) {
                     movie_name = (String) entry.getValue();
+                    if(movie_name == null){
+                        System.out.println("no movie found");
+                        return null;}
                 }
                 if (entry.getKey().matches("Type")) {
                     type = Movie.Type.valueOf((String) entry.getValue());
