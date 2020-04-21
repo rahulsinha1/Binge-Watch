@@ -1,5 +1,7 @@
 package edu.northeastern.cs5200.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -129,6 +131,11 @@ public abstract class Person {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public void addPhone(Phone phoneToAdd)
+  {
+    this.phone.add(phoneToAdd);
   }
 
 
