@@ -33,6 +33,11 @@ public class Movie {
     @Column(columnDefinition = "text")
     private String poster;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "streamer_id", referencedColumnName = "id")
+
+    private Streamer streamer;
+
     public static enum Type {
         movie, series, episode
     }

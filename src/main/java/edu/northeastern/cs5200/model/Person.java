@@ -1,5 +1,6 @@
 package edu.northeastern.cs5200.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public abstract class Person {
 
   private String lastName;
 
-  @Column(name = "username" ,unique = true , nullable = false)
+  @Column(name = "username", unique = true, nullable = false)
   private String username;
 
   @Column(nullable = false)
@@ -53,12 +54,16 @@ public abstract class Person {
     this.username = username;
     this.pass = pass;
     this.email = email;
-    this.phone = phone;
+    if (this.phone != null) {
+      this.phone.clear();
+    }
+    this.phone.addAll(phone);
     this.address = address;
     this.role = role;
   }
 
   public Person() {
+    this.phone = new ArrayList<>();
   }
 
   public Role getRole() {
@@ -132,7 +137,11 @@ public abstract class Person {
   }
 
   public void setPhone(List<Phone> phone) {
-    this.phone = phone;
+    if (this.phone != null) {
+      this.phone.clear();
+    }
+    this.phone.addAll(phone);
+
   }
 
   public Address getAddress() {
