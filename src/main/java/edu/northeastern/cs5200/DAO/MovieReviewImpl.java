@@ -1,12 +1,10 @@
 package edu.northeastern.cs5200.DAO;
 
-import edu.northeastern.cs5200.model.Critic;
-import edu.northeastern.cs5200.model.MovieReview;
 import edu.northeastern.cs5200.model.Movie;
+import edu.northeastern.cs5200.model.MovieReview;
 import edu.northeastern.cs5200.model.User;
-import edu.northeastern.cs5200.repository.CriticRepository;
-import edu.northeastern.cs5200.repository.MovieReviewRepository;
 import edu.northeastern.cs5200.repository.MovieRepository;
+import edu.northeastern.cs5200.repository.MovieReviewRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,17 +19,17 @@ public class MovieReviewImpl implements MovieReviewDao {
     @Autowired
     MovieReviewRepository movieReviewRepository;
     @Autowired
-    CriticRepository criticRepository;
+    UserRepository userRepository;
     @Autowired
     MovieRepository movieRepository;
 
     @CrossOrigin
     @Override
-    @RequestMapping("api/critic/addmovieReview/{criticname}/{moviename}")
-    public MovieReview addRateAndComment(@RequestParam String comment, @RequestParam int grade, @PathVariable("criticname") String criticName, @PathVariable("moviename") String movieName) {
-        Critic critic = criticRepository.findByCriticName(criticName);
+    @RequestMapping("api/user/addmovieReview/{username}/{moviename}")
+    public MovieReview addRateAndComment(@RequestParam String comment, @RequestParam int grade, @PathVariable("username") String userName, @PathVariable("moviename") String movieName) {
+        User user = userRepository.findByUserName(userName);
         Movie movie = movieRepository.findFromDB(movieName);
-        MovieReview movieReview = new MovieReview(comment,grade,movieName,criticName,movie,critic);
+        MovieReview movieReview = new MovieReview(comment, grade, movieName, userName, movie, user);
         movieReviewRepository.save(movieReview);
         return movieReview;
     }
@@ -45,9 +43,9 @@ public class MovieReviewImpl implements MovieReviewDao {
 
     @CrossOrigin
     @Override
-    @RequestMapping("api/movieReview/find/criticname")
-    public List<MovieReview> findMovieReviewForCritic(String criticName) {
-        return movieReviewRepository.findmovieReviewsBycriticName(criticName);
+    @RequestMapping("api/movieReview/find/username")
+    public List<MovieReview> findMovieReviewForUser(String userName) {
+        return movieReviewRepository.findmovieReviewsByuserName(userName);
     }
 
     @CrossOrigin
