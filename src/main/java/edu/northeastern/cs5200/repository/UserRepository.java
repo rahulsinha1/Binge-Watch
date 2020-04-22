@@ -36,8 +36,8 @@ public interface UserRepository
 	@Query("Select user from User user where user.id in(select w.user_id from WatchList w where w.movie_id =?1)")
 	List<User> getUserWithMovie(int id);
 
-	@Query(value = "select movieReview from MovieReview movieReview where movieReview.criticName = :criticName")
-	public List<MovieReview> findmovieReviewsBycriticName(@Param("criticName") String criticName);
+	@Query(value = "select movieReview from MovieReview movieReview where movieReview.userName = :userName")
+	public List<MovieReview> findmovieReviewsByuserName(@Param("userName") String userName);
 
 	@Query(value = "select movieReview from MovieReview movieReview where movieReview.movieName = :movieName")
 	public List<MovieReview> findmovieReviewsByMovie(@Param("movieName") String movieName);
