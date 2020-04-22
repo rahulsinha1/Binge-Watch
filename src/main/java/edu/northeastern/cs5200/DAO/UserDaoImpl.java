@@ -5,7 +5,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import edu.northeastern.cs5200.model.*;
-import edu.northeastern.cs5200.repository.CriticListRepository;
+import edu.northeastern.cs5200.repository.MovieReviewRepository;
 import edu.northeastern.cs5200.repository.MovieRepository;
 import edu.northeastern.cs5200.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
   @Autowired
   MovieRepository movieRepository;
   @Autowired
-  CriticListRepository criticListRepository;
+  MovieReviewRepository movieReviewRepository;
 
   @CrossOrigin
   @RequestMapping("/api/user/description")
@@ -134,6 +134,7 @@ public class UserDaoImpl implements UserDao {
   public User removePhone(@PathVariable("username") String username, @RequestBody Phone phone)
   {
     User toUpdate = userRepository.findByUserName(username);
+    System.out.println(toUpdate.getPhone().get(0).getNumber());
     toUpdate.getPhone().remove(phone);
     userRepository.save(toUpdate);
     return toUpdate;

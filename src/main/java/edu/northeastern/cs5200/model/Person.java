@@ -1,12 +1,17 @@
 package edu.northeastern.cs5200.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@MappedSuperclass
+@Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Person {
 
   @Id
@@ -32,11 +37,11 @@ public abstract class Person {
           cascade = CascadeType.ALL,
           orphanRemoval = true
   )
+  @JoinColumn(name = "phone_id", referencedColumnName = "id")
   private List<Phone> phone;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id", referencedColumnName = "id")
-  @JsonIgnore
   private Address address;
 
   public Person(String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role) {
@@ -122,8 +127,7 @@ public abstract class Person {
     this.email = email;
   }
 
-  public void addPhone(Phone phoneToAdd)
-  {
+  public void addPhone(Phone phoneToAdd) {
     this.phone.add(phoneToAdd);
   }
 
