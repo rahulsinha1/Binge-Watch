@@ -1,14 +1,15 @@
 package edu.northeastern.cs5200.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.Date;
+
 import java.util.List;
 
-
+@Table(uniqueConstraints=
+@UniqueConstraint(columnNames={"id", "name"})
+)
 @Entity
 public class Movie {
     @Id
@@ -38,7 +39,7 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie",fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private List<CriticList> criticLists;
+    private List<MovieReview> movieReviews;
 
     @OneToMany(mappedBy = "movie",fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
@@ -161,12 +162,12 @@ public class Movie {
         this.poster = poster;
     }
 
-    public List<CriticList> getCriticLists() {
-        return criticLists;
+    public List<MovieReview> getMovieReviews() {
+        return movieReviews;
     }
 
-    public void setCriticLists(List<CriticList> criticLists) {
-        this.criticLists = criticLists;
+    public void setMovieReviews(List<MovieReview> movieReviews) {
+        this.movieReviews = movieReviews;
     }
 
     public List<Streamer> getStreamers() {

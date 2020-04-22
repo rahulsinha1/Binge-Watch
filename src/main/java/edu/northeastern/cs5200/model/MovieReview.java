@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "criticList")
-public class CriticList {
+public class MovieReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,7 +15,8 @@ public class CriticList {
     private String comment;
     private int grade;
     private String movieName;
-    private String userName;
+    private String criticName;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "movie_id")
@@ -24,23 +24,23 @@ public class CriticList {
 
     @ManyToOne
     @JoinColumn(name = "critic_id")
-    private User user;
+    private Critic critic;
 
-    public CriticList(){}
+    public MovieReview(){}
 
-    public CriticList(String comment,int grade,String movieName,String userName){
+    public MovieReview(String comment, int grade, String movieName, String criticName){
         this.comment = comment;
         this.grade = grade;
-        this.userName = userName;
+        this.criticName = criticName;
         this.movieName = movieName;
     }
-    public CriticList(String comment,int grade,String movieName,String userName,Movie movie,User user){
+    public MovieReview(String comment, int grade, String movieName, String criticName, Movie movie, Critic critic){
         this.comment = comment;
         this.grade = grade;
-        this.userName = userName;
+        this.criticName = criticName;
         this.movieName = movieName;
         this.movie = movie;
-        this.user = user;
+        this.critic = critic;
     }
 
     public int getId() {
@@ -83,19 +83,19 @@ public class CriticList {
         this.movieName = movieName;
     }
 
-    public User getUser() {
-        return user;
+    public Critic getCritic() {
+        return critic;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCritic(Critic critic) {
+        this.critic = critic;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getCriticName() {
+        return criticName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCriticName(String criticName) {
+        this.criticName = criticName;
     }
 }

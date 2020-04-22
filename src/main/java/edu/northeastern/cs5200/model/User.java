@@ -3,22 +3,14 @@ package edu.northeastern.cs5200.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "email")
-})
 public class User extends Person {
-  private String company;
 
   public User(int id, String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role) {
     super(firstName, lastName, username, pass, email, phone, address, role);
-  }
-  public User(int id, String firstName, String lastName, String username, String pass, String email, List<Phone> phone, Address address, Role role,String company) {
-    super(firstName, lastName, username, pass, email, phone, address, role);
-    this.company = company;
   }
 
   public User() {
@@ -59,21 +51,6 @@ public class User extends Person {
     follower.following.remove(this);
   }
 
-  public String getCompany() {
-    return company;
-  }
-
-  public void setCompany(String company) {
-    this.company = company;
-  }
-
-  public List<CriticList> getCriticLists() {
-    return criticLists;
-  }
-
-  public void setCriticLists(List<CriticList> criticLists) {
-    this.criticLists = criticLists;
-  }
 
   @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinTable(name = "USER_RELATIONS",
@@ -91,10 +68,6 @@ public class User extends Person {
           joinColumns = @JoinColumn(name = "user_id"),
           inverseJoinColumns = @JoinColumn(name = "movie_id"))
   private List<Movie> watchList;
-
-  @OneToMany(mappedBy = "user",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-  @JsonIgnore
-  private List<CriticList> criticLists;
 
   public User(String username, String pass) {
     super(username, pass);
