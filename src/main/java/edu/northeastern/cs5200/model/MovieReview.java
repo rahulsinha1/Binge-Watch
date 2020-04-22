@@ -15,32 +15,33 @@ public class MovieReview {
     private String comment;
     private int grade;
     private String movieName;
-    private String criticName;
+    private String userName;
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie")
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "critic_id")
-    private Critic critic;
+    @JoinColumn(name = "user")
+    private User user;
 
     public MovieReview(){}
 
-    public MovieReview(String comment, int grade, String movieName, String criticName){
+    public MovieReview(String comment, int grade, String movieName, String userName) {
         this.comment = comment;
         this.grade = grade;
-        this.criticName = criticName;
+        this.userName = userName;
         this.movieName = movieName;
     }
-    public MovieReview(String comment, int grade, String movieName, String criticName, Movie movie, Critic critic){
+
+    public MovieReview(String comment, int grade, String movieName, String userName, Movie movie, User user) {
         this.comment = comment;
         this.grade = grade;
-        this.criticName = criticName;
+        this.userName = userName;
         this.movieName = movieName;
         this.movie = movie;
-        this.critic = critic;
+        this.user = user;
     }
 
     public int getId() {
@@ -83,19 +84,19 @@ public class MovieReview {
         this.movieName = movieName;
     }
 
-    public Critic getCritic() {
-        return critic;
+    public User getUser() {
+        return user;
     }
 
-    public void setCritic(Critic critic) {
-        this.critic = critic;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getCriticName() {
-        return criticName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCriticName(String criticName) {
-        this.criticName = criticName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
