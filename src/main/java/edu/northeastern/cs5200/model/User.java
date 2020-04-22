@@ -1,9 +1,10 @@
 package edu.northeastern.cs5200.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -16,6 +17,11 @@ public class User extends Person {
   public User() {
   }
 
+  private String company;
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+  @Fetch(FetchMode.SUBSELECT)
+  private List<MovieReview> movieReviews;
 
   public List<User> getFollowers() {
     return followers;

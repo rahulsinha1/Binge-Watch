@@ -15,7 +15,7 @@ public class Critic extends Person {
 
   private String company;
 
-  @OneToMany(mappedBy = "critic", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
   @Fetch(FetchMode.SUBSELECT)
   private List<MovieReview> movieReviews;
 

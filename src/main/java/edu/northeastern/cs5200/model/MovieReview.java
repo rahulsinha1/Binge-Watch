@@ -19,11 +19,11 @@ public class MovieReview {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie")
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user")
     private User user;
 
     public MovieReview(){}
