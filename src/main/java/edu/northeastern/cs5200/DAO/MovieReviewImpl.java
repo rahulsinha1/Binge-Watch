@@ -23,9 +23,9 @@ public class MovieReviewImpl implements MovieReviewDao {
     @Autowired
     MovieRepository movieRepository;
 
-    @CrossOrigin
     @Override
-    @RequestMapping("api/user/addmovieReview/{username}/{moviename}")
+    @PostMapping("api/user/addmovieReview/{username}/{moviename}")
+    @CrossOrigin
     public MovieReview addRateAndComment(@RequestParam String comment, @RequestParam int grade, @PathVariable("username") String userName, @PathVariable("moviename") String movieName) {
         User user = userRepository.findByUserName(userName);
         Movie movie = movieRepository.findFromDB(movieName);
@@ -43,15 +43,15 @@ public class MovieReviewImpl implements MovieReviewDao {
 
     @CrossOrigin
     @Override
-    @RequestMapping("api/movieReview/find/username")
-    public List<MovieReview> findMovieReviewForUser(String userName) {
+    @RequestMapping("api/movieReview/find/user/{username}")
+    public List<MovieReview> findMovieReviewForUser(@PathVariable("username") String userName) {
         return movieReviewRepository.findmovieReviewsByuserName(userName);
     }
 
     @CrossOrigin
     @Override
-    @RequestMapping("api/movieReview/find/moviename")
-    public List<MovieReview> findMovieReviewByMovieName(String movieName) {
+    @RequestMapping("api/movieReview/find/{movieName}")
+    public List<MovieReview> findMovieReviewByMovieName(@PathVariable("movieName") String movieName) {
         return movieReviewRepository.findmovieReviewsByMovie(movieName);
     }
 }
