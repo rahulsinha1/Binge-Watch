@@ -1,6 +1,5 @@
-# cs5200-spring2020-team2
+# CS 5200 Final Project
 
-CS 5200 Final Project
 Team name : Team 2
 Team Members : 
 
