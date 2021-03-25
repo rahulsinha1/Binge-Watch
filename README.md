@@ -1,6 +1,6 @@
 # Binge-Watch
 
-Team name : Team 2 Team Members :
+Team Members :
 
 Shanshan Liu Pengyu Wang Rahul Sinha
 
